@@ -5,7 +5,7 @@
 				<div class="card">
 					<div class="card-header">
 						<h5 class="card-title">{{ stock.name }}</h5>
-						<p>(Price: {{ stock.price }}| Quantity: )</p>
+						<p>(Price: {{ stock.price }} | Quantity: {{ stock.quantity }} )</p>
 					</div>
 					<div class="card-body">
 						<input type="number" placeholder="Quantity">

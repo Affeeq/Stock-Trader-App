@@ -8,11 +8,17 @@ export const store = new Vuex.Store({
 		funds: 10000,
 		portfolio: [],
 		stocks: [
-			{ name: 'BMW', price: '' },
-			{ name: 'Google', price: '' },
-			{ name: 'Apple', price: '' },
-			{ name: 'Twitter', price: '' }
-		]
+			{ name: 'BMW', price: '', bought: false },
+			{ name: 'Google', price: '', bought: false },
+			{ name: 'Apple', price: '', bought: false },
+			{ name: 'Twitter', price: '', bought: false }
+		],
+		stockQuantity: { name: '', quantity: '' }
+	},
+	getters: {
+		setQuantity: state => {
+			return state.stockQuantity;
+		}
 	},
 	mutations: {
 		randomNum: state => {
@@ -21,7 +27,14 @@ export const store = new Vuex.Store({
 			}
 		},
 		buyStocks: (state, payload) => {
-			state.portfolio.push(payload);
+			if (!payload.bought) {
+				payload.bought = true;
+				state.stockQuantity.name = payload.name;
+				state.portfolio.push({ name: payload.name, price: payload.price, quantity: state.stockQuantity.quantity });
+			}
+		},
+		setQuantity: (state, payload) => {
+			state.stockQuantity.quantity = payload;
 		}
 	},
 	actions: {
@@ -30,6 +43,9 @@ export const store = new Vuex.Store({
 		},
 		buyStocks: ({ commit }, payload) => {
 			commit('buyStocks', payload);
+		},
+		setQuantity: ({ commit }, payload) => {
+			commit('setQuantity', payload);
 		}
 	}
 });

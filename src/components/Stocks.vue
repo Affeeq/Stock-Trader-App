@@ -8,7 +8,7 @@
 						<p>(Price: {{ stock.price }})</p>
 					</div>
 					<div class="card-body">
-						<input type="number" placeholder="Quantity">
+						<input type="number" placeholder="Quantity" v-model="quantity">
 						<a class="btn btn-primary float-right" @click="buyStocks(stock)">Buy</a>
 					</div>
 				</div>
@@ -29,6 +29,16 @@
 			...mapActions([
 				'buyStocks'
 			])
+		},
+		computed: {
+			quantity: {
+				get() {
+					return this.$store.getters.setQuantity;
+				},
+				set(value) {
+					this.$store.dispatch('setQuantity', value);
+				}
+			}
 		}
 	}
 </script>
