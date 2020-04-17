@@ -1,15 +1,15 @@
 <template>
 	<div class="container">
 		<div class="row">
-			<div class="col-6 mt-3" v-for="stock in portfolio">
+			<div class="col-6 mt-3" v-for="(pf, index) in portfolio">
 				<div class="card">
 					<div class="card-header">
-						<h5 class="card-title">{{ stock.name }}</h5>
-						<p>(Price: {{ stock.price }} | Quantity: {{ stock.quantity }} )</p>
+						<h5 class="card-title">{{ pf.name }}</h5>
+						<p>(Price: {{ pf.price }} | Quantity: {{ pf.quantity }} )</p>
 					</div>
 					<div class="card-body">
-						<input type="number" placeholder="Quantity" v-model="quantity">
-						<a class="btn btn-primary float-right" @click="sellStocks(stock)">Sell</a>
+						<input type="number" placeholder="Quantity" v-model="quantity[index]">
+						<a class="btn btn-primary float-right" @click="sellStocks({pf, quantity, index})">Sell</a>
 					</div>
 				</div>
 			</div>
@@ -22,23 +22,14 @@
 	export default {
 		data() {
 			return {
-				portfolio: this.$store.state.portfolio
+				portfolio: this.$store.state.portfolio,
+				quantity: this.$store.state.quantity
 			}
 		},
 		methods: {
 			...mapActions([
 				'sellStocks'
 			])
-		},
-		computed: {
-			quantity: {
-				get() {
-					// return this.$store.getters.setQuantity.quantity;
-				},
-				set(value) {
-					this.$store.dispatch('setQuantity', value);
-				}
-			}
 		}
 	}
 </script>

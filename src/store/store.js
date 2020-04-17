@@ -13,53 +13,61 @@ export const store = new Vuex.Store({
 			{ name: 'Apple', price: '', bought: false },
 			{ name: 'Twitter', price: '', bought: false }
 		],
-		stockQuantity: { name: '', quantity: '' }
-	},
-	getters: {
-		setQuantity: state => {
-			return state.stockQuantity;
-		}
+		quantity: []
 	},
 	mutations: {
 		randomNum: state => {
-			for (let stock of state.stocks) {
-				stock.price = (Math.floor(Math.random() * (150 - 50 + 1)) + 50);
+			if (state.portfolio.length == 0) {
+				for (let stock of state.stocks) {
+					stock.price = (Math.floor(Math.random() * (150 - 50 + 1)) + 50);
+				}
+			} else {
+				let price;
+				for (let stock of state.stocks) {
+					price = (Math.floor(Math.random() * (150 - 50 + 1)) + 50);
+					for (let pf of state.portfolio) {
+						if (pf.name == stock.name) {
+							pf.price = price;
+							break;
+						}
+					}
+					stock.price = price;
+				}
 			}
 		},
 		buyStocks: (state, payload) => {
-			if (!payload.bought) {
-				payload.bought = true;
-				state.portfolio.push({ name: payload.name, price: payload.price, quantity: state.stockQuantity.quantity });
-				state.stockQuantity.quantity = '';
+			if (!state.quantity[payload.index]) {
+				console.log("Need to specify quantity")
+			} else if (!payload.stock.bought) {
+				payload.stock.bought = true;
+				state.portfolio.push({ name: payload.stock.name, price: payload.stock.price, quantity: state.quantity[payload.index] });
+				state.quantity.splice(payload.index, 1, '');
 			} else {
 				for (let stock of state.portfolio) {
-					if (stock.name === payload.name) {
-						return stock.quantity = Number(state.stockQuantity.quantity) + Number(stock.quantity);
+					if (stock.name === payload.stock.name) {
+						stock.quantity = Number(state.quantity[payload.index]) + Number(stock.quantity);
+						return state.quantity.splice(payload.index, 1, '');
 					}
 				}
 			}
 		},
 		sellStocks: (state, payload) => {
-			if ((Number(payload.quantity) - Number(state.stockQuantity.quantity)) < 0 ) {
+			if ((Number(payload.pf.quantity) - parseInt(payload.quantity[payload.index]) ) < 0 ) {
 				console.log('Cannot do that');
-			} else if ((Number(payload.quantity) - Number(state.stockQuantity.quantity)) > 0 ) {
-				payload.quantity = Number(payload.quantity) - Number(state.stockQuantity.quantity);
+				state.quantity.splice(payload.index, 1, '');
+			} else if ((Number(payload.pf.quantity) - parseInt(payload.quantity[payload.index]) ) > 0 ) {
+				payload.pf.quantity = Number(payload.pf.quantity) - parseInt(payload.quantity[payload.index]);
+				state.quantity.splice(payload.index, 1, '');
 			} else {
-				let counter = 0;
-				for (let stock of state.portfolio) {
-					if ( ( Number(stock.quantity) - Number(payload.quantity) ) == 0 )  {
-						return state.portfolio.splice(counter, 1);
-					} else {
-						counter++;
+				for (let stock of state.stocks) {
+					if (stock.name == payload.pf.name) {
+						stock.bought = false;
+						break;
 					}
 				}
+				state.quantity.splice(payload.index, 1, '');
+				return state.portfolio.splice(payload.index, 1);
 			}
-		},
-		setQuantity: (state, payload) => {
-			state.stockQuantity.quantity = payload;
-		},
-		setName: (state, payload) => {
-			state.stockQuantity.name = payload;
 		}
 	},
 	actions: {
@@ -71,12 +79,6 @@ export const store = new Vuex.Store({
 		},
 		sellStocks: ({ commit }, payload) => {
 			commit('sellStocks', payload);
-		},
-		setQuantity: ({ commit }, payload) => {
-			commit('setQuantity', payload);
-		},
-		setName: ({ commit }, payload) => {
-			commit('setName', payload);
 		}
 	}
 });
