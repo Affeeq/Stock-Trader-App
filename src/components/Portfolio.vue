@@ -8,8 +8,8 @@
 						<p>(Price: {{ stock.price }} | Quantity: {{ stock.quantity }} )</p>
 					</div>
 					<div class="card-body">
-						<input type="number" placeholder="Quantity">
-						<a class="btn btn-primary float-right">Sell</a>
+						<input type="number" placeholder="Quantity" v-model="quantity">
+						<a class="btn btn-primary float-right" @click="sellStocks(stock)">Sell</a>
 					</div>
 				</div>
 			</div>
@@ -18,10 +18,26 @@
 </template>
 
 <script>
+	import { mapActions } from 'vuex';
 	export default {
 		data() {
 			return {
 				portfolio: this.$store.state.portfolio
+			}
+		},
+		methods: {
+			...mapActions([
+				'sellStocks'
+			])
+		},
+		computed: {
+			quantity: {
+				get() {
+					// return this.$store.getters.setQuantity.quantity;
+				},
+				set(value) {
+					this.$store.dispatch('setQuantity', value);
+				}
 			}
 		}
 	}
