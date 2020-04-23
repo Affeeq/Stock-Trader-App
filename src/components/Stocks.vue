@@ -8,8 +8,8 @@
 						<p>(Price: {{ stock.price }})</p>
 					</div>
 					<div class="card-body">
-						<input type="number" placeholder="Quantity" v-model="quantity[index]">
-						<a class="btn btn-primary float-right" @click="buyStocks({stock, index})">Buy</a>
+						<input type="number" placeholder="Quantity" v-model="quantity[index]" @blur="clear(index)">
+						<a class="btn btn-primary float-right" @click.stop="buyStocks({stock, index})">Buy</a>
 					</div>
 				</div>
 			</div>
@@ -22,13 +22,14 @@
 	export default {
 		data() {
 			return {
-				stocks: this.$store.state.stocks,
-				quantity: this.$store.state.quantity
+				quantity: this.$store.state.quantity,
+				stocks: this.$store.state.stocks
 			};
 		},
 		methods: {
 			...mapActions([
-				'buyStocks'
+				'buyStocks',
+				'clear'
 			])
 		}
 	}

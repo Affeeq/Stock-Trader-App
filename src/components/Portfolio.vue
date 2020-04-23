@@ -8,8 +8,8 @@
 						<p>(Price: {{ pf.price }} | Quantity: {{ pf.quantity }} )</p>
 					</div>
 					<div class="card-body">
-						<input type="number" placeholder="Quantity" v-model="quantity[index]">
-						<a class="btn btn-primary float-right" @click="sellStocks({pf, quantity, index})">Sell</a>
+						<input type="number" placeholder="Quantity" v-model="quantity[index]" @blur="clear(index)">
+						<a class="btn btn-primary float-right" @click.stop="sellStocks({pf, quantity, index})">Sell</a>
 					</div>
 				</div>
 			</div>
@@ -28,7 +28,8 @@
 		},
 		methods: {
 			...mapActions([
-				'sellStocks'
+				'sellStocks',
+				'clear'
 			])
 		}
 	}
