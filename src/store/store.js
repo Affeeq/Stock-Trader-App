@@ -1,10 +1,10 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-// import modules
-import * as actions from './modules/actions.js';
-import * as mutations from './modules/mutations.js';
-import * as getters from './modules/getters.js';
+// import root file
+import * as actions from './actions';
+import * as mutations from './mutations';
+import * as getters from './getters';
 
 // vuex config
 Vue.use(Vuex);
