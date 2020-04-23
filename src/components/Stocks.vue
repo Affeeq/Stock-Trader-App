@@ -9,7 +9,7 @@
 					</div>
 					<div class="card-body">
 						<input type="number" placeholder="Quantity" v-model="quantity[index]" @blur="clear(index)">
-						<a class="btn btn-primary float-right" @click.stop="buyStocks({stock, index})">Buy</a>
+						<a class="btn btn-primary float-right" @click.stop="buyStocks(stock)">Buy</a>
 					</div>
 				</div>
 			</div>

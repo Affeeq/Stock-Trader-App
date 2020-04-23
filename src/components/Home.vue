@@ -3,16 +3,18 @@
 		<h3>Trade or View Your Portfolio</h3>
 		<p>Click on 'End Day' to begin a new day</p>
 		<hr>
-		<p>Your Funds: {{ funds }}</p>
+		<p>Your Funds: {{ getFunds }}</p>
 	</div>
 </template>
 
 <script>
+	import { mapGetters } from 'vuex';
+	
 	export default {
-		data() {
-			return {
-				funds: this.$store.state.funds
-			}
+		computed: {
+			...mapGetters([
+				'getFunds'
+			])
 		}
 	}
 </script>

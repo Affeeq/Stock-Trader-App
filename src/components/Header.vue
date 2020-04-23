@@ -7,7 +7,7 @@
 				<router-link to="/stocks" tag="li" active-class="active"><a class="nav-link">Stocks</a></router-link>
 			</ul>
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item"><button class="nav-link button" @click="randomNum">End Day</button></li>
+				<li class="nav-item"><button class="nav-link button" @click="endDay">End Day</button></li>
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						Save & Load
@@ -17,7 +17,7 @@
 						<li class="nav-item"><button class="nav-link button data" @click="getData">Load Data</button></li>
 					</div>
 				</li>
-				<li class="nav-item"><a class="nav-link disabled" href="#"><strong>Funds: {{ funds }}</strong></a></li>
+				<li class="nav-item"><a class="nav-link disabled" href="#"><strong>Funds: {{ getFunds }}</strong></a></li>
 			</ul>
 		</nav>
 	</div>
@@ -25,6 +25,7 @@
 
 <script>
 	import { mapActions } from 'vuex';
+	import { mapGetters } from 'vuex';
 	export default {
 		data() {
 			return {
@@ -35,12 +36,12 @@
 		},
 		methods: {
 			...mapActions([
-				'randomNum',
+				'endDay',
 				'fetch',
 				'clear'
 			]),
 			submit() {
-    			this.$http.put('{node}.json', { portfolio: this.portfolio, stocks: this.stocks, funds: this.funds })
+    			this.$http.put('{node}.json', { portfolio: this.portfolio, stocks: this.stocks, funds: this.getFunds })
     				.then(response => {
     					return {messages: response.body};
     				}, error => {
@@ -58,9 +59,9 @@
 			}
 		},
 		computed: {
-			funds() {
-				return this.$store.getters.getFunds;
-			}
+			...mapGetters([
+				'getFunds'
+			])
 		}
 	}
 </script>

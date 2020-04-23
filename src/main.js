@@ -5,10 +5,14 @@ import App from './App.vue'
 import { routes } from './routes';
 import { store } from './store/store.js';
 
+// app config
 Vue.use(VueRouter);
 Vue.use(VueResource);
 
+// root link to DB
 Vue.http.options.root = 'https://the-stock-trader-6732a.firebaseio.com/';
+
+// fetching only the data
 Vue.http.interceptors.push((request, next) => {
 	next(response => {
 		response.json = () => {
@@ -17,17 +21,20 @@ Vue.http.interceptors.push((request, next) => {
 	});
 });
 
+// accessing routes
 const router = new VueRouter({
 	routes,
 	mode: 'history'
 });
 
+
+// root vue instance
 new Vue({
 	el: '#app',
 	router,
 	store,
 	created() {
-    	this.$store.dispatch('randomNum');
+    	this.$store.dispatch('createdRandomNum');
 	},
 	render: h => h(App)
 })
