@@ -29,9 +29,7 @@
 	export default {
 		data() {
 			return {
-				node: 'data',
-				stocks: this.$store.state.stocks,
-				portfolio: this.$store.state.portfolio
+				node: 'data'
 			};
 		},
 		methods: {
@@ -41,7 +39,7 @@
 				'clear'
 			]),
 			submit() {
-    			this.$http.put('{node}.json', { portfolio: this.portfolio, stocks: this.stocks, funds: this.getFunds })
+    			this.$http.put('{node}.json', { portfolio: this.getPortfolio, stocks: this.getStocks, funds: this.getFunds })
     				.then(response => {
     					return {messages: response.body};
     				}, error => {
@@ -60,7 +58,9 @@
 		},
 		computed: {
 			...mapGetters([
-				'getFunds'
+				'getFunds',
+				'getStocks',
+				'getPortfolio'
 			])
 		}
 	}
