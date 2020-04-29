@@ -8,7 +8,7 @@
 						<p>(Price: {{ stock.price }})</p>
 					</div>
 					<div class="card-body">
-						<input type="number" placeholder="Quantity" v-model="quantity[index]" @blur="clear(index)">
+						<input :id="stock.name" type="number" placeholder="Quantity" v-model="quantity[index]" @blur="clear(index)">
 						<a class="btn btn-primary float-right" @click.stop="buyStocks(stock)">Buy</a>
 					</div>
 				</div>
@@ -33,6 +33,10 @@
 			])
 		}
 	}
+	// dynamically name input to select using querySelector, #input1 etc
+	// use data to store name
+	// put the store name of input into buyStock 
+	// do logic in mutation
 </script>
 
 <style>

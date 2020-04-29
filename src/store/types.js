@@ -1,0 +1,1 @@
+export const GET_FUNDS = 'getter/GET_FUNDS';
