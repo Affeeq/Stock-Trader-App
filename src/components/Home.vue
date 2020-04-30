@@ -3,7 +3,7 @@
 		<h3>Trade or View Your Portfolio</h3>
 		<p>Click on 'End Day' to begin a new day</p>
 		<hr>
-		<p>Your Funds: {{ getFunds }}</p>
+		<p>Your Funds: {{ funds }}</p>
 	</div>
 </template>
 
@@ -12,9 +12,9 @@
 	
 	export default {
 		computed: {
-			...mapGetters([
-				'getFunds'
-			])
+			...mapGetters({
+				funds: 'custom/getFunds'
+			})
 		}
 	}
 </script>

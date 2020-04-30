@@ -3,13 +3,13 @@
 		<div class="row">
 			<div class="col-6 mt-3" v-for="(pf, index) in portfolio">
 				<div class="card">
-					<div class="card-header">
+					<div class="card-header bg-primary">
 						<h5 class="card-title">{{ pf.name }}</h5>
 						<p>(Price: {{ pf.price }} | Quantity: {{ pf.quantity }} )</p>
 					</div>
-					<div class="card-body">
+					<div class="card-body text-center text-md-left">
 						<input type="number" placeholder="Quantity" v-model="quantity[index]" @blur="clear(index)">
-						<a class="btn btn-primary float-right" @click.stop="sellStocks({pf, index})">Sell</a>
+						<a class="btn btn-danger float-md-right mt-3 mt-md-0" @click.stop="sellStocks({pf, index})">Sell</a>
 					</div>
 				</div>
 			</div>
@@ -22,13 +22,15 @@
 	export default {
 		data() {
 			return {
-				portfolio: this.$store.state.portfolio,
-				quantity: this.$store.state.quantity
+				portfolio: this.$store.state.portfolio.portfolio,
+				quantity: this.$store.state.custom.quantity
 			}
 		},
 		methods: {
-			...mapActions([
-				'sellStocks',
+			...mapActions('portfolio', [
+				'sellStocks'
+			]),
+			...mapActions('custom', [
 				'clear'
 			])
 		}
@@ -43,5 +45,11 @@
 
 	.card-title + p {
 		display: inline;
+	}
+
+	@media (max-width: 600px) {
+		input {
+			width: 75%;
+		}
 	}
 </style>

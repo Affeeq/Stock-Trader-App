@@ -1,28 +1,21 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-// import root file
-import * as actions from './actions';
-import * as mutations from './mutations';
-import * as getters from './getters';
+// import modules
+import stocks from './modules/stocks.js';
+import portfolio from './modules/portfolio.js';
+import custom from './modules/custom.js';
+import data from './modules/data.js';
 
 // vuex config
 Vue.use(Vuex);
 
+// vuex instance using modules
 export const store = new Vuex.Store({
-	state: {
-		funds: 10000,
-		portfolio: [],
-		stocks: [
-			{ name: 'BMW', price: '', bought: false },
-			{ name: 'Google', price: '', bought: false },
-			{ name: 'Apple', price: '', bought: false },
-			{ name: 'Twitter', price: '', bought: false }
-		],
-		quantity: [],
-		currentQuantity: ''
-	},
-	getters,
-	mutations,
-	actions
+	modules: {
+		custom,
+		stocks,
+		portfolio,
+		data
+	}
 });
