@@ -12,15 +12,6 @@ Vue.use(VueResource);
 // root link to DB
 Vue.http.options.root = 'https://the-stock-trader-6732a.firebaseio.com/';
 
-// fetching only the data
-Vue.http.interceptors.push((request, next) => {
-	next(response => {
-		response.json = () => {
-			return {messages: response.body}
-		}
-	});
-});
-
 // accessing routes
 const router = new VueRouter({
 	routes,
@@ -34,7 +25,7 @@ new Vue({
 	router,
 	store,
 	created() {
-    	this.$store.dispatch('createdRandomNum');
+    	this.$store.dispatch('stocks/createdRandomNum');
 	},
 	render: h => h(App)
 })
