@@ -16,9 +16,14 @@ const mutations = {
 	},
 	clear: (state, payload) => {
 		state.currentQuantity = state.quantity[payload];
-		state.currentQuantity == 0 || !state.currentQuantity 	? state.currentQuantity = '' 
-																: state.currentQuantity = state.quantity[payload];
+		console.log(checkQuantity(state.currentQuantity))
+		checkQuantity(state.currentQuantity) 	? state.currentQuantity = ''
+												: state.currentQuantity = state.quantity[payload];
 		state.quantity.splice(payload, 1, '');
+
+		function checkQuantity(currentQuantity) {
+			return currentQuantity < 0 || currentQuantity === 0 || !currentQuantity || !Number.isInteger(currentQuantity);
+		}
 	},
 	minusFunds: (state, payload) => {
 		return state.funds -= (Number(payload.stock.price) * Number(payload.currentQuantity));
