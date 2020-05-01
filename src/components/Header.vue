@@ -37,9 +37,6 @@
 			...mapActions('stocks', [
 				'endDay'
 			]),
-			...mapActions('custom', [
-				'clear'
-			]),
 			...mapActions('data', [
 				'submit',
 				'fetch'

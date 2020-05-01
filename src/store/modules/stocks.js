@@ -31,15 +31,10 @@ const mutations = {
 
 const actions = {
 	buyStocks: ({ dispatch, commit, rootState }, payload) => {
-		(!rootState.custom.currentQuantity) ? alert('Specify a quantity to buy') 
-		: checkFunds(rootState, payload) 	? alert('Not enough funds!') 
-		: (!payload.bought) 				? newStock(dispatch, commit, payload)
-											: addStock(dispatch, payload, rootState);
+		(!payload.bought) 	? newStock(dispatch, commit, payload)
+							: addStock(dispatch, payload, rootState);
 
 		//////////// functions for buying stocks conditional /////////////////////
-		function checkFunds(rootState, payload) {
-			return rootState.custom.funds - (payload.price * rootState.custom.currentQuantity) < 0;
-		}
 
 		function newStock(dispatch, commit, payload) {
 			commit('buyStocks', payload);
