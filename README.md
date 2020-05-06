@@ -14,7 +14,7 @@
 ### Database: Firebase
 
 ### Summary
-* This app is built from scratch using the idea from the VUE JS 2 - The Complete Guide Course on Udemy.
+* This app is built from scratch using the idea from the VUE JS 2 - The Complete Guide Course on Udemy. Push into a new repo to clean up.
 
 ### Key things that I learned from this project
 * Vuex as a central store 
