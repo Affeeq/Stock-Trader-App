@@ -1,5 +1,17 @@
 import resources from './resources/resources.js';
 
+const state = {
+	idToken: null,
+	userId: null
+}
+
+const mutations = {
+	authUser: (state, payload) => {
+		state.idToken = payload.idToken;
+		state.userId = payload.localId;
+	}
+}
+
 const actions = {
 	fetch: ({ state, dispatch }) => {
 		resources.data.getDb()
@@ -24,24 +36,26 @@ const actions = {
 			console.log(error);
 		});
 	},
-	signUp: ({}, payload) => {
+	signUp: ({commit}, payload) => {
 		resources.signUp.saveUser({
 			email: payload.email,
 			password: payload.password,
 			returnSecureToken: true
 		}).then(response => {
 			console.log(response);
+			commit('authUser', response.data);
 		}, error => {
 			console.log(error);
 		});
 	},
-	signIn: ({}, payload) => {
+	signIn: ({commit}, payload) => {
 		resources.signIn.saveUser({
 			email: payload.email,
 			password: payload.password,
 			returnSecureToken: true
 		}).then(response => {
 			console.log(response);
+			commit('authUser', response.data);
 		}, error => {
 			console.log(error);
 		});
@@ -50,5 +64,7 @@ const actions = {
 
 export default {
 	namespaced: true,
+	state,
+	mutations,
 	actions
 }
