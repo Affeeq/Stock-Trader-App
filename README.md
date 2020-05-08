@@ -1,6 +1,6 @@
 # Stock Trader App
 
-### Website hosted on AWS S3 
+### Website hosted on AWS S3
 
 ### Technology
 * Vue.js
