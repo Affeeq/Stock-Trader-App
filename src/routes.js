@@ -7,16 +7,16 @@ import Signup from './components/Signup.vue';
 import Signin from './components/Signin.vue';
 
 export const routes = [
-	{ path: '', component: Signin, components: {
+	{ path: '', component: Home, components: {
+		default: Home,
+		'header-top': Header,
+	} },
+	{ path: '/signin', component: Signin, components: {
 		default: Signin,
 		'header-top': Header,
 	} },
 	{ path: '/signup', component: Signup, components: {
 		default: Signup,
-		'header-top': Header,
-	} },
-	{ path: '/home', component: Home, components: {
-		default: Home,
 		'header-top': Header,
 	} },
 	{ path: '/portfolio', component: Portfolio, components: {

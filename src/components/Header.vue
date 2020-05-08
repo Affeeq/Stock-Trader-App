@@ -7,11 +7,11 @@
 			</button>
 
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav mr-auto">
+				<ul class="navbar-nav mr-auto" v-if="auth">
 					<router-link to="/portfolio" tag="li" active-class="active"><a class="nav-link">Portfolio</a></router-link>
 					<router-link to="/stocks" tag="li" active-class="active"><a class="nav-link">Stocks</a></router-link>
 				</ul>
-				<ul class="navbar-nav ml-auto">
+				<ul class="navbar-nav ml-auto" v-if="auth">
 					<li class="nav-item"><button class="nav-link button" @click="endDay">End Day</button></li>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -23,6 +23,10 @@
 						</div>
 					</li>
 					<li class="nav-item"><a class="nav-link disabled" href="#"><strong>Funds: {{ funds }}</strong></a></li>
+				</ul>
+				<ul class="navbar-nav ml-auto" v-if="!auth">
+					<router-link to="/signin" tag="li" active-class="active"><a class="nav-link">Sign In</a></router-link>
+					<router-link to="/signup" tag="li" active-class="active"><a class="nav-link">Sign Up</a></router-link>
 				</ul>
 			</div>
 		</nav>
@@ -46,7 +50,8 @@
 			...mapGetters({
 				funds: 'custom/getFunds',
 				portfolio: 'portfolio/getPortfolio',
-				stocks: 'stocks/getStocks'
+				stocks: 'stocks/getStocks',
+				auth: 'data/isAuthenticated'
 			})
 		}
 	}

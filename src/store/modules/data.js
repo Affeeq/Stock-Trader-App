@@ -62,9 +62,16 @@ const actions = {
 	}
 };
 
+const getters = {
+	isAuthenticated: state => {
+		return state.idToken !== null;
+	}
+}
+
 export default {
 	namespaced: true,
 	state,
 	mutations,
-	actions
+	actions,
+	getters
 }
