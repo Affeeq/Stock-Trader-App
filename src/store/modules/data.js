@@ -50,6 +50,11 @@ const actions = {
 			console.log(response);
 			commit('authUser', response.data);
 			router.replace('/');
+			const now = new Date();
+			const expirationDate = new Date(now.getTime() + response.data.expiresIn * 1000);
+			localStorage.setItem('token', response.data.idToken);
+			localStorage.setItem('userId', response.data.localId);
+			localStorage.setItem('expirationDate', expirationDate);
 			dispatch('setLogoutTImer', response.data.expiresIn);
 		}, error => {
 			console.log(error);
@@ -64,13 +69,37 @@ const actions = {
 			console.log(response);
 			commit('authUser', response.data);
 			router.replace('/');
+			const now = new Date();
+			const expirationDate = new Date(now.getTime() + response.data.expiresIn * 1000);
+			localStorage.setItem('token', response.data.idToken);
+			localStorage.setItem('userId', response.data.localId);
+			localStorage.setItem('expirationDate', expirationDate);
 			dispatch('setLogoutTImer', response.data.expiresIn);
 		}, error => {
 			console.log(error);
 		});
 	},
+	autoSignin: ({commit}) => {
+		const token = localStorage.getItem('token');
+		if (!token) {
+			return
+		}
+		const now = new Date();
+		const expirationDate = localStorage.getItem('expirationDate');
+		if (now >= expirationDate) {
+			return
+		}
+		const userId = localStorage.getItem('userId');
+		commit('authUser', {
+			idToken: token,
+			localId: userId
+		});
+	},
 	logout: ({commit}) => {
 		commit('clearAuthUser');
+		localStorage.removeItem('token');
+		localStorage.removeItem('userId');
+		localStorage.removeItem('expirationDate');
 		router.replace('/signin');
 	},
 	setLogoutTImer: ({commit}, expirationTime) => {
