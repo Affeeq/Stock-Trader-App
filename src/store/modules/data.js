@@ -1,4 +1,5 @@
 import resources from './resources/resources.js';
+import router from '../../routes.js';
 
 const state = {
 	idToken: null,
@@ -9,6 +10,10 @@ const mutations = {
 	authUser: (state, payload) => {
 		state.idToken = payload.idToken;
 		state.userId = payload.localId;
+	},
+	clearAuthUser: state => {
+		state.idToken = null;
+		state.userId = null;
 	}
 }
 
@@ -36,7 +41,7 @@ const actions = {
 			console.log(error);
 		});
 	},
-	signUp: ({commit}, payload) => {
+	signUp: ({commit, dispatch}, payload) => {
 		resources.signUp.saveUser({
 			email: payload.email,
 			password: payload.password,
@@ -44,11 +49,13 @@ const actions = {
 		}).then(response => {
 			console.log(response);
 			commit('authUser', response.data);
+			router.replace('/');
+			dispatch('setLogoutTImer', response.data.expiresIn);
 		}, error => {
 			console.log(error);
 		});
 	},
-	signIn: ({commit}, payload) => {
+	signIn: ({commit, dispatch}, payload) => {
 		resources.signIn.saveUser({
 			email: payload.email,
 			password: payload.password,
@@ -56,9 +63,22 @@ const actions = {
 		}).then(response => {
 			console.log(response);
 			commit('authUser', response.data);
+			router.replace('/');
+			dispatch('setLogoutTImer', response.data.expiresIn);
 		}, error => {
 			console.log(error);
 		});
+	},
+	logout: ({commit}) => {
+		commit('clearAuthUser');
+		router.replace('/signin');
+	},
+	setLogoutTImer: ({commit}, expirationTime) => {
+		let time = expirationTime * 1000;
+		setTimeout(() => { 
+			commit('clearAuthUser');
+			return router.replace('/signin');
+		},time)
 	}
 };
 
