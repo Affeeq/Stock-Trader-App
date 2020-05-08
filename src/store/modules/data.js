@@ -1,12 +1,8 @@
-import Vue from 'vue';
-
-const state = {
-	node: 'data' 
-};
+import resources from './resources/resources.js';
 
 const actions = {
 	fetch: ({ state, dispatch }) => {
-		Vue.http.get('{state.node}.json')
+		resources.data.getDb()
 		.then(response => {
 			return response.json();
 		})
@@ -21,9 +17,31 @@ const actions = {
 		});
 	},
 	submit: ({ state, rootState }) => {
-		Vue.http.put('{state.node}.json', { portfolio: rootState.portfolio.portfolio, stocks: rootState.stocks.stocks, funds: rootState.custom.funds })
+		resources.data.saveDb({ portfolio: rootState.portfolio.portfolio, stocks: rootState.stocks.stocks, funds: rootState.custom.funds })
 		.then(response => {
 			return {messages: response.body};
+		}, error => {
+			console.log(error);
+		});
+	},
+	signUp: ({}, payload) => {
+		resources.signUp.saveUser({
+			email: payload.email,
+			password: payload.password,
+			returnSecureToken: true
+		}).then(response => {
+			console.log(response);
+		}, error => {
+			console.log(error);
+		});
+	},
+	signIn: ({}, payload) => {
+		resources.signIn.saveUser({
+			email: payload.email,
+			password: payload.password,
+			returnSecureToken: true
+		}).then(response => {
+			console.log(response);
 		}, error => {
 			console.log(error);
 		});
@@ -32,6 +50,5 @@ const actions = {
 
 export default {
 	namespaced: true,
-	state,
 	actions
 }
