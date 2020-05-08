@@ -3,9 +3,19 @@ import Home from './components/Home.vue';
 import Stocks from './components/Stocks.vue';
 import Portfolio from './components/Portfolio.vue';
 import Catch from './components/Error.vue';
+import Signup from './components/Signup.vue';
+import Signin from './components/Signin.vue';
 
 export const routes = [
-	{ path: '', component: Home, components: {
+	{ path: '', component: Signin, components: {
+		default: Signin,
+		'header-top': Header,
+	} },
+	{ path: '/signup', component: Signup, components: {
+		default: Signup,
+		'header-top': Header,
+	} },
+	{ path: '/home', component: Home, components: {
 		default: Home,
 		'header-top': Header,
 	} },
