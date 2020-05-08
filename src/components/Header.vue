@@ -12,17 +12,18 @@
 					<router-link to="/stocks" tag="li" active-class="active"><a class="nav-link">Stocks</a></router-link>
 				</ul>
 				<ul class="navbar-nav ml-auto" v-if="auth">
-					<li class="nav-item"><button class="nav-link button" @click="endDay">End Day</button></li>
+					<li class="nav-item"><a class="nav-link" @click="endDay">End Day</a></li>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Save & Load
 						</a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li class="nav-item"><button class="nav-link button data" @click="submit">Save Data</button></li>
-							<li class="nav-item"><button class="nav-link button data" @click="fetch">Load Data</button></li>
+						<div class="dropdown-menu text-center" aria-labelledby="navbarDropdown">
+							<li class="nav-item"><a class="nav-link" @click="submit">Save Data</a></li>
+							<li class="nav-item"><a class="nav-link" @click="fetch">Load Data</a></li>
 						</div>
 					</li>
 					<li class="nav-item"><a class="nav-link disabled" href="#"><strong>Funds: {{ funds }}</strong></a></li>
+					<li class="nav-item"><a class="nav-link" @click="logout">Logout</a></li>
 				</ul>
 				<ul class="navbar-nav ml-auto" v-if="!auth">
 					<router-link to="/signin" tag="li" active-class="active"><a class="nav-link">Sign In</a></router-link>
@@ -43,7 +44,8 @@
 			]),
 			...mapActions('data', [
 				'submit',
-				'fetch'
+				'fetch',
+				'logout'
 			])
 		},
 		computed: {
@@ -57,15 +59,9 @@
 	}
 </script>
 
-<style>
-	.button {
-		border: none;
-		background: none;
-		outline: none;
-	}
-
-	.data {
-		margin: 0 auto;
+<style scoped>
+	.nav-link {
+		cursor: pointer;
 	}
 
 	.dropdown-menu {
