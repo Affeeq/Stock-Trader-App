@@ -8,9 +8,17 @@
 </template>
 
 <script>
-export default {
-  
-}
+  import { mapActions } from 'vuex';
+  export default {
+    methods: {
+      ...mapActions('data', [
+        'autoSignin'
+        ])
+    },
+    created() {
+      this.autoSignin();
+    }
+  }
 </script>
 
 <style>
