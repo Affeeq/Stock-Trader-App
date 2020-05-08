@@ -3,7 +3,7 @@
 		<h3>Trade or View Your Portfolio</h3>
 		<p>Click on 'End Day' to begin a new day</p>
 		<hr>
-		<p>Your Funds: {{ funds }}</p>
+		<p v-if="auth">Your Funds: {{ funds }}</p>
 	</div>
 </template>
 
@@ -13,7 +13,8 @@
 	export default {
 		computed: {
 			...mapGetters({
-				funds: 'custom/getFunds'
+				funds: 'custom/getFunds',
+				auth: 'data/isAuthenticated'
 			})
 		}
 	}
