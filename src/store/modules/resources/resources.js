@@ -16,8 +16,13 @@ const signIn = Vue.resource('https://identitytoolkit.googleapis.com/v1', {}, {
 	saveUser: {method: 'POST' , url: 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDUnTPZNITTBM9jV96JPsbEQDBfA4ydfNQ'}
 });
 
+const emailExist = Vue.resource('https://identitytoolkit.googleapis.com/v1', {}, {
+	fetch: {method: 'POST', url: 'https://identitytoolkit.googleapis.com/v1/accounts:createAuthUri?key=AIzaSyDUnTPZNITTBM9jV96JPsbEQDBfA4ydfNQ'}
+});
+
 export default {
 	data,
 	signUp,
-	signIn
+	signIn,
+	emailExist
 }

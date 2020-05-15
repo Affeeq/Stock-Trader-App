@@ -3,7 +3,8 @@ import router from '../../routes.js';
 
 const state = {
 	idToken: null,
-	userId: null
+	userId: null,
+	emailRegistered: null
 }
 
 const mutations = {
@@ -14,6 +15,9 @@ const mutations = {
 	clearAuthUser: state => {
 		state.idToken = null;
 		state.userId = null;
+	},
+	checkEmailRegistered: (state, isEmailRegistered) => {
+		state.emailRegistered = isEmailRegistered;
 	}
 }
 
@@ -58,6 +62,7 @@ const actions = {
 			dispatch('setLogoutTImer', response.data.expiresIn);
 		}, error => {
 			console.log(error);
+			// need to push the error in component 
 		});
 	},
 	signIn: ({commit, dispatch}, payload) => {
@@ -108,12 +113,27 @@ const actions = {
 			commit('clearAuthUser');
 			return router.replace('/signin');
 		},time)
+	},
+	checkEmailExist: ({commit}, {email, uri}) => {
+		resources.emailExist.fetch({
+			identifier: email,
+			continueUri: uri
+		}).then(response => {
+			// extract registered object
+			commit('checkEmailRegistered', response.data.registered);
+			console.log(response.data.registered);
+		}).catch(error => {
+			console.log(error);
+		});
 	}
 };
 
 const getters = {
 	isAuthenticated: state => {
 		return state.idToken !== null;
+	},
+	isEmailRegistered: state => {
+		return state.emailRegistered;
 	}
 }
 
