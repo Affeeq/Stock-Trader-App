@@ -4,7 +4,8 @@ import router from '../../routes.js';
 const state = {
 	idToken: null,
 	userId: null,
-	emailRegistered: null
+	emailRegistered: null,
+	isSignIn: false
 }
 
 const mutations = {
@@ -18,6 +19,9 @@ const mutations = {
 	},
 	checkEmailRegistered: (state, isEmailRegistered) => {
 		state.emailRegistered = isEmailRegistered;
+	},
+	checkSignIn: (state, isSignIn) => {
+		state.isSignIn = isSignIn;
 	}
 }
 
@@ -62,7 +66,6 @@ const actions = {
 			dispatch('setLogoutTImer', response.data.expiresIn);
 		}, error => {
 			console.log(error);
-			// need to push the error in component 
 		});
 	},
 	signIn: ({commit, dispatch}, payload) => {
@@ -81,6 +84,7 @@ const actions = {
 			localStorage.setItem('expirationDate', expirationDate);
 			dispatch('setLogoutTImer', response.data.expiresIn);
 		}, error => {
+			commit('checkSignIn', false);
 			console.log(error);
 		});
 	},
@@ -134,6 +138,9 @@ const getters = {
 	},
 	isEmailRegistered: state => {
 		return state.emailRegistered;
+	},
+	isSignIn: state => {
+		return state.isSignIn;
 	}
 }
 

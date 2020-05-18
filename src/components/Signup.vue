@@ -96,32 +96,16 @@
 			},
 			focused(dataName) {
 				this.$set(this.focusedValidation, dataName, true );
-				(dataName === 'focusedEmail') 			? this.checkEmail()
-				:(dataName === 'focusedConfirmEmail') 	? this.checkConfirmEmail()
-				:(dataName === 'focusedPassword')		? this.checkPassword()
-														: this.checkConfirmPassword();
-			},
-			checkEmail() {
-				(this.emailReg.test(this.user.email)) 	? (this.isEmail = true, this.checkEmailExist(this.checkEmailRegistered))
-														: this.isEmail = false;
-			},
-			checkConfirmEmail() {
-				(this.confirmEmail === this.user.email)	? this.isConfirmEmail = true
-														: this.isConfirmEmail = false;
-			},
-			checkPassword() {
-				(this.user.password && this.user.password.length >= 6)	? this.isPassword = true
-																		: this.isPassword = false;
-			},
-			checkConfirmPassword() {
-				(this.confirmPassword === this.user.password)	? this.isConfirmPassword = true
-																: this.isConfirmPassword = false;
+				(dataName === 'focusedEmail') 			? this.checkEmail
+				:(dataName === 'focusedConfirmEmail') 	? this.checkConfirmEmail
+				:(dataName === 'focusedPassword')		? this.checkPassword
+														: this.checkConfirmPassword;
 			},
 			validation() {
-				this.checkEmail()
-				this.checkConfirmEmail()
-				this.checkPassword()        
-				this.checkConfirmPassword();
+				this.checkEmail;
+				this.checkConfirmEmail;
+				this.checkPassword;      
+				this.checkConfirmPassword;
 				if (!this.focusedValidation.focusedEmail) {
 					this.focused('focusedEmail')
 				}
@@ -144,6 +128,22 @@
 				}
 				return obj;
 			},
+			checkEmail() {
+				(this.emailReg.test(this.user.email)) 	? (this.isEmail = true, this.checkEmailExist(this.checkEmailRegistered))
+														: this.isEmail = false;
+			},
+			checkConfirmEmail() {
+				(this.confirmEmail === this.user.email)	? this.isConfirmEmail = true
+														: this.isConfirmEmail = false;
+			},
+			checkPassword() {
+				(this.user.password && this.user.password.length >= 6)	? this.isPassword = true
+																		: this.isPassword = false;
+			},
+			checkConfirmPassword() {
+				(this.confirmPassword === this.user.password)	? this.isConfirmPassword = true
+																: this.isConfirmPassword = false;
+			},
 			...mapGetters('data',[
 				'isEmailRegistered'
 			])
@@ -152,22 +152,22 @@
 			// data in objects: need to use '' to access it
 			'user.email'() {
 				if (this.focusedValidation.focusedEmail) {
-					this.checkEmail();
+					this.checkEmail;
 				}
 			},
 			confirmEmail() {
 				if (this.focusedValidation.focusedConfirmEmail) {
-					this.checkConfirmEmail();
+					this.checkConfirmEmail;
 				}
 			},
 			'user.password'() {
 				if (this.focusedValidation.focusedPassword) {
-					this.checkPassword();
+					this.checkPassword;
 				}
 			},
 			confirmPassword() {
 				if (this.focusedValidation.focusedConfirmPassword) {
-					this.checkConfirmPassword();
+					this.checkConfirmPassword;
 				}
 			}
 		}
