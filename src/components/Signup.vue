@@ -1,22 +1,20 @@
 <template>
-	<div class="container">
+	<b-container>
 		<h1 class="text-center">Sign Up</h1>
-		<form>
-			<div class="form-group">
-				<label for="email">Email</label>
+		<b-form @submit.prevent="checkForm">
+			<b-form-group label="Email" label-for="email">
 				<small v-if="!isEmail && focusedValidation.focusedEmail && !isEmailRegistered">Please type a correct email</small>
 				<small v-if="isEmailRegistered">That email already existed</small>
-				<input 
+				<b-form-input
+					id="email"
 					type="email"
-					class="form-control" 
-					:class="{ danger: (!isEmail && focusedValidation.focusedEmail) || isEmailRegistered }" 
-					id="email" 
-					v-model="user.email" 
+					v-model="user.email"
+					:class="{ danger: (!isEmail && focusedValidation.focusedEmail) || isEmailRegistered }"
 					placeholder="jane@doe.com"
 					@blur="focused('focusedEmail')"
-					>
-			</div>
-			<div class="form-group">
+				></b-form-input>
+			</b-form-group>
+			<b-form-group>
 				<label for="confirmEmail">Confirm Email</label>
 				<small v-if="!isConfirmEmail && focusedValidation.focusedConfirmEmail">Email does not match</small>
 				<input 
@@ -28,8 +26,8 @@
 					placeholder="jane@doe.com"
 					@blur="focused('focusedConfirmEmail')"
 					>
-			</div>
-			<div class="form-group">
+			</b-form-group>
+			<b-form-group>
 				<label for="password">Password</label>
 				<small v-if="!isPassword && focusedValidation.focusedPassword">Password needs to be longer than 6 characters</small>
 				<input 
@@ -40,8 +38,8 @@
 					v-model="user.password"
 					@blur="focused('focusedPassword')"
 					>
-			</div>
-			<div class="form-group">
+			</b-form-group>
+			<b-form-group>
 				<label for="confirmPassword">Confirm Password</label>
 				<small v-if="!isConfirmPassword && focusedValidation.focusedConfirmPassword">Passwords do not match!</small>
 				<input 
@@ -52,10 +50,10 @@
 					v-model="confirmPassword"
 					@blur="focused('focusedConfirmPassword')"
 				>
-			</div>
-			<button type="submit" class="btn btn-primary" @click.prevent="checkForm">Submit</button>
-		</form>
-	</div>
+			</b-form-group>
+			<b-button variant="primary" type="submit">Submit</b-button>
+		</b-form>
+	</b-container>
 </template>
 
 <script>

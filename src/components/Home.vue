@@ -1,10 +1,10 @@
 <template>
-	<div class="jumbotron mt-3">
+	<b-jumbotron class="mt-3">
 		<h3>Trade or View Your Portfolio</h3>
 		<p>Click on 'End Day' to begin a new day</p>
 		<hr>
 		<p v-if="auth">Your Funds: {{ funds }}</p>
-	</div>
+	</b-jumbotron>
 </template>
 
 <script>

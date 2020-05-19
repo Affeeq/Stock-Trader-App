@@ -1,30 +1,31 @@
 <template>
-	<div class="container">
-		<div class="row">
-			<div class="col-6 mt-3" v-for="(pf, index) in portfolio">
-				<div class="card">
-					<div class="card-header bg-primary">
-						<h5 class="card-title">{{ pf.name }}</h5>
+	<b-container>
+		<b-row>
+			<b-col cols="6" class="mt-3" v-for="(pf, index) in portfolio">
+				<b-card no-body>
+					<b-card-header header-bg-variant="primary">
+						<b-card-title title-tag="h5">{{ pf.name }}</b-card-title>
 						<p>(Price: {{ pf.price }} | Quantity: {{ pf.quantity }} )</p>
-					</div>
-					<div class="card-body text-center text-md-left">
+					</b-card-header>
+					<b-card-body class="text-center text-md-left">
 						<input 
 							type="number" 
 							placeholder="Quantity" 
 							v-model="quantity[index]" 
 							@blur="clear(quantity[index], index)"
-							:class="{ danger: disable(quantity[index], pf.price, pf.quantity) }"
+							:class="{ danger: disable(quantity[index], pf.quantity) }"
 						>
-						<button 
-							class="btn btn-danger float-md-right mt-3 mt-md-0" 
+						<b-button
+							variant="danger"
+							class="float-md-right mt-3 mt-md-0" 
 							@click="sellStocks({pf, index})"
-							:disabled="disable(quantity[index], pf.price, pf.quantity)"
-						>Sell</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+							:disabled="disable(quantity[index], pf.quantity)"
+						>Sell</b-button>
+					</b-card-body>
+				</b-card>
+			</b-col>
+		</b-row>
+	</b-container>
 </template>
 
 <script>
@@ -43,8 +44,9 @@
 			...mapActions('custom', [
 				'currentQuantity'
 			]),
-			disable(quantity, price, portfolioQuantity) {
-				return quantity <= 0 || (quantity - Math.floor(quantity)) !== 0 || quantity > portfolioQuantity;
+			// need to check for danger styling for quantity
+			disable(quantity, portfolioQuantity) {
+				return quantity <= 0 || quantity > portfolioQuantity || (quantity - Math.floor(quantity)) !== 0;
 			},
 			clear(quantity,index) {
 				this.currentQuantity(quantity);

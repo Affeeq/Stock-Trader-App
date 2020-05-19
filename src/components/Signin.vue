@@ -1,33 +1,27 @@
 <template>
-	<div class="container">
-		<div class="container">
+	<b-container>
 		<h1 class="text-center">Sign In</h1>
-		<form>
-			<div class="form-group">
-				<label for="email">Email</label>
-				<input 
-					type="email" 
-					class="form-control"
-					:class="{ danger: !isSignIn && isSubmit }" 
-					id="email" 
+		<b-form @submit.prevent="submit(email, password)">
+			<b-form-group label="Email" label-for="email">
+				<b-form-input
+					id="email"
+					type="email"
 					v-model="email"
-				>
-			</div>
-			<div class="form-group">
-				<label for="password">Password</label>
-				<input 
-					type="password" 
-					class="form-control"
-					:class="{ danger: !isSignIn && isSubmit }" 
-					id="password" 
+					:class="{ danger: !isSignIn && isSubmit }"
+				></b-form-input>
+			</b-form-group>
+			<b-form-group label="Password" label-for="password">
+				<b-form-input
+					id="password"
+					type="password"
 					v-model="password"
-				>
-			</div>
-			<button type="submit" class="btn btn-primary" @click.prevent="submit(email, password)">Submit</button>
+					:class="{ danger: !isSignIn && isSubmit }"
+				></b-form-input>
+			</b-form-group>
+			<b-button variant="info" type="submit">Submit</b-button>
 			<small v-if="!isSignIn && isSubmit">Email and Password do not match</small>
-		</form>
-	</div>
-	</div>
+		</b-form>
+	</b-container>
 </template>
 
 <script>
