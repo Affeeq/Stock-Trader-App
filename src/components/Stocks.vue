@@ -1,7 +1,7 @@
 <template>
 	<b-container>
 		<b-row>
-			<b-col cols="6" class="mt-3" v-for="(stock, index) in stocks">
+			<b-col cols="6" class="mt-3" v-for="(stock, index) in stocks" :key="stocks.stock">
 				<b-card no-body>
 					<b-card-header header-bg-variant="success">
 						<b-card-title title-tag="h5">{{ stock.name }}</b-card-title>

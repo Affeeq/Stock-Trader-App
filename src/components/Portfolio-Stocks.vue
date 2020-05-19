@@ -38,12 +38,7 @@
 			...mapActions('custom', [
 				'currentQuantity'
 			]),
-			// need to check for danger styling for quantity
 			disable(userQuantity, portfolioQuantity) {
-				// console.log(parseInt(userQuantity) > parseInt(portfolioQuantity))
-				// console.log(portfolioQuantity)
-				// console.log(userQuantity)
-
 				return userQuantity <= 0 || parseInt(userQuantity) > parseInt(portfolioQuantity) || (userQuantity - Math.floor(userQuantity)) !== 0;
 			},
 			clear(quantity,index) {
