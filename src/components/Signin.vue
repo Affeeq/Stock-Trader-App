@@ -1,7 +1,7 @@
 <template>
 	<b-container>
 		<h1 class="text-center">Sign In</h1>
-		<b-form @submit.prevent="submit(email, password)">
+		<b-form @submit.prevent="submit(email, password)" id="form">
 			<b-form-group label="Email" label-for="email">
 				<b-form-input
 					id="email"
@@ -69,5 +69,45 @@
 
 	small {
 		color: red;
+	}
+
+	.btn {
+		display: block;
+		margin: 0 auto;
+	}
+
+	@media (max-width: 1382px) {
+		#form {
+			width: 30%;
+			margin: 0 auto;
+		}
+	}
+
+	@media (max-width: 992px) {
+		#form {
+			width: 40%;
+			margin: 0 auto;
+		}
+	}
+
+	@media (max-width: 768px) {
+		#form {
+			width: 50%;
+			margin: 0 auto;
+		}
+	}
+
+	@media (max-width: 600px) {
+		#form {
+			width: 60%;
+			margin: 0 auto;
+		}
+	}
+
+	@media (max-width: 480px) {
+		#form {
+			width: 70%;
+			margin: 0 auto;
+		}
 	}
 </style>
