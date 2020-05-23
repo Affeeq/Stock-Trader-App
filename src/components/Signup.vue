@@ -1,7 +1,11 @@
 <template>
 	<b-container>
 		<h1 class="text-center">Sign Up</h1>
-		<b-form @submit.prevent="checkForm">
+		<b-jumbotron v-if="isAuthenticated">
+			<h3>You are already logged in!</h3>
+			<p>Click <b-link to="/" active-class="active" exact>here</b-link> to get back.</p>
+		</b-jumbotron>
+		<b-form @submit.prevent="checkForm" id="form" v-if='!isAuthenticated'>
 			<b-form-group label="Email" label-for="email">
 				<small v-if="!isEmail && focusedValidation.focusedEmail && !isEmailRegistered">Please type a correct email</small>
 				<small v-if="isEmailRegistered">That email already existed</small>
@@ -57,6 +61,8 @@
 </template>
 
 <script>
+	// added auth if logged in, do not show form
+	// better to just be redirected 
 	import { mapActions, mapGetters } from 'vuex';
  
 	export default {
@@ -143,7 +149,8 @@
 																: this.isConfirmPassword = false;
 			},
 			...mapGetters('data',[
-				'isEmailRegistered'
+				'isEmailRegistered',
+				'isAuthenticated'
 			])
 		},
 		watch: {

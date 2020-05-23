@@ -76,13 +76,13 @@ const actions = {
 		}).then(response => {
 			console.log(response);
 			commit('authUser', response.data);
-			router.replace('/');
 			const now = new Date();
 			const expirationDate = new Date(now.getTime() + response.data.expiresIn * 1000);
 			localStorage.setItem('token', response.data.idToken);
 			localStorage.setItem('userId', response.data.localId);
 			localStorage.setItem('expirationDate', expirationDate);
 			dispatch('setLogoutTImer', response.data.expiresIn);
+			router.replace('/');
 		}, error => {
 			commit('checkSignIn', false);
 			console.log(error);
@@ -141,6 +141,9 @@ const getters = {
 	},
 	isSignIn: state => {
 		return state.isSignIn;
+	},
+	isIdToken: state => {
+		return state.idToken;
 	}
 }
 
