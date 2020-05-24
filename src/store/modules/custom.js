@@ -14,7 +14,6 @@ const mutations = {
 		state.funds = payload.funds;
 	},
 	currentQuantity: (state, payload) => {
-		console.log(payload)
 		state.currentQuantity = payload;
 	},
 	minusFunds: (state, payload) => {
