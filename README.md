@@ -1,4 +1,4 @@
-# Stock Trader App
+# Stock Trader App v3
 
 ### Website hosted on AWS S3
 
