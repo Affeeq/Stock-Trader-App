@@ -44,8 +44,8 @@
 				'signIn'
 			]),
 			submit(email, password) {
-				this.isSubmit = true;
 				this.signIn({email, password});
+				this.isSubmit = true;
 			}
 		},
 		computed: {

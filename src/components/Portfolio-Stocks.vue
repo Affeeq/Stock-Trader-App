@@ -31,7 +31,6 @@
 			}
 		},
 		props: ['portfolioStock', 'index'],
-		// selling does not work quantity is erased before it can be processed
 		methods: {
 			...mapActions('portfolio', [
 				'sellStocks'

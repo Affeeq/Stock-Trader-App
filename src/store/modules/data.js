@@ -55,7 +55,7 @@ const actions = {
 			password: payload.password,
 			returnSecureToken: true
 		}).then(response => {
-			console.log(response);
+			commit('checkSignIn', true);
 			commit('authUser', response.data);
 			router.replace('/');
 			const now = new Date();
@@ -68,13 +68,13 @@ const actions = {
 			console.log(error);
 		});
 	},
-	signIn: ({commit, dispatch}, payload) => {
+	signIn: ({commit, dispatch, state}, payload) => {
 		resources.signIn.saveUser({
 			email: payload.email,
 			password: payload.password,
 			returnSecureToken: true
 		}).then(response => {
-			console.log(response);
+			commit('checkSignIn', true);
 			commit('authUser', response.data);
 			const now = new Date();
 			const expirationDate = new Date(now.getTime() + response.data.expiresIn * 1000);
