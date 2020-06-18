@@ -7,7 +7,7 @@
 					id="email"
 					type="email"
 					v-model="email"
-					:class="{ danger: !isSignIn && isSubmit }"
+					:class="{ danger: !isSignIn && isSignInSubmit }"
 				></b-form-input>
 			</b-form-group>
 			<b-form-group label="Password" label-for="password">
@@ -15,11 +15,11 @@
 					id="password"
 					type="password"
 					v-model="password"
-					:class="{ danger: !isSignIn && isSubmit }"
+					:class="{ danger: !isSignIn && isSignInSubmit }"
 				></b-form-input>
 			</b-form-group>
 			<b-button variant="info" type="submit">Submit</b-button>
-			<small v-if="!isSignIn && isSubmit">Email and Password do not match</small>
+			<small v-if="!isSignIn && isSignInSubmit">Email and Password do not match</small>
 		</b-form>
 	</b-container>
 </template>
@@ -45,12 +45,12 @@
 			]),
 			submit(email, password) {
 				this.signIn({email, password});
-				this.isSubmit = true;
 			}
 		},
 		computed: {
 			...mapGetters('data', [
-				'isSignIn'
+				'isSignIn',
+				'isSignInSubmit'
 			])
 		}
 	}

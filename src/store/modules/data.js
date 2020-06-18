@@ -5,7 +5,8 @@ const state = {
 	idToken: null,
 	userId: null,
 	emailRegistered: null,
-	isSignIn: false
+	isSignIn: false,
+	isSignInSubmit: false
 }
 
 const mutations = {
@@ -22,6 +23,9 @@ const mutations = {
 	},
 	checkSignIn: (state, isSignIn) => {
 		state.isSignIn = isSignIn;
+	},
+	checkSignInSubmit: (state, isSubmit) => {
+		state.isSignInSubmit = isSubmit;
 	}
 }
 
@@ -57,13 +61,13 @@ const actions = {
 		}).then(response => {
 			commit('checkSignIn', true);
 			commit('authUser', response.data);
-			router.replace('/');
 			const now = new Date();
 			const expirationDate = new Date(now.getTime() + response.data.expiresIn * 1000);
 			localStorage.setItem('token', response.data.idToken);
 			localStorage.setItem('userId', response.data.localId);
 			localStorage.setItem('expirationDate', expirationDate);
 			dispatch('setLogoutTImer', response.data.expiresIn);
+			router.replace('/');
 		}, error => {
 			console.log(error);
 		});
@@ -75,6 +79,7 @@ const actions = {
 			returnSecureToken: true
 		}).then(response => {
 			commit('checkSignIn', true);
+			commit('checkSignInSubmit', true);
 			commit('authUser', response.data);
 			const now = new Date();
 			const expirationDate = new Date(now.getTime() + response.data.expiresIn * 1000);
@@ -85,7 +90,7 @@ const actions = {
 			router.replace('/');
 		}, error => {
 			commit('checkSignIn', false);
-			console.log(error);
+			commit('checkSignInSubmit', true);
 		});
 	},
 	autoSignin: ({commit}) => {
@@ -103,9 +108,12 @@ const actions = {
 			idToken: token,
 			localId: userId
 		});
+		commit('checkSignIn', true);
 	},
 	logout: ({commit}) => {
 		commit('clearAuthUser');
+		commit('checkSignIn', false);
+		commit('checkSignInSubmit', false);
 		localStorage.removeItem('token');
 		localStorage.removeItem('userId');
 		localStorage.removeItem('expirationDate');
@@ -144,6 +152,9 @@ const getters = {
 	},
 	isIdToken: state => {
 		return state.idToken;
+	},
+	isSignInSubmit: state => {
+		return state.isSignInSubmit;
 	}
 }
 
