@@ -7,6 +7,7 @@
 ### Technology
 * Vue.js
 * Bootstrap-Vue
+* Firebase
 
 ### About
 * Add User Authorization into the app.
