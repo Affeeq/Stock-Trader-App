@@ -41,19 +41,19 @@ const actions = {
 
 		//////////// functions for selling stocks conditional /////////////////////
 		function checkQuantity(rootState, payload) {
-			return Number(payload.pf.quantity) - rootState.custom.currentQuantity;
+			return Number(payload.portfolioStock.quantity) - rootState.custom.currentQuantity;
 		}
 
 		function deleteStock(dispatch, commit, payload, rootState) {
 			commit('deleteStocks', {portfolioIndex: payload.index});
-			dispatch('stocks/deleteStocks', {portfolio: payload.pf}, {root: true});
-			dispatch('custom/addFunds', {portfolioPrice: payload.pf.price, currentQuantity: rootState.custom.currentQuantity}, {root: true});
+			dispatch('stocks/deleteStocks', {portfolio: payload.portfolioStock}, {root: true});
+			dispatch('custom/addFunds', {portfolioPrice: payload.portfolioStock.price, currentQuantity: rootState.custom.currentQuantity}, {root: true});
 			dispatch('custom/clearCurrentQuantity', {}, {root: true});
 		}
 
 		function sellStocks(dispatch, commit, payload, rootState) {
-			commit('sellStocks', {portfolioName: payload.pf.name, currentQuantity: rootState.custom.currentQuantity});
-			dispatch('custom/addFunds', {portfolioPrice: payload.pf.price, currentQuantity: rootState.custom.currentQuantity}, {root: true});
+			commit('sellStocks', {portfolioName: payload.portfolioStock.name, currentQuantity: rootState.custom.currentQuantity});
+			dispatch('custom/addFunds', {portfolioPrice: payload.portfolioStock.price, currentQuantity: rootState.custom.currentQuantity}, {root: true});
 			dispatch('custom/clearCurrentQuantity', {}, {root: true});
 		}
 	},

@@ -1,8 +1,8 @@
 <template>
-	<div class="jumbotron mt-3">
+	<b-jumbotron class="mt-3">
 		<h1>Something went wrong</h1>
-		<p>Click <router-link to="/" active-class="active" exact><a>here</a></router-link> to get back.</p>
-	</div>
+		<p>Click <b-link to="/" active-class="active" exact>here</b-link> to get back.</p>
+	</b-jumbotron>
 </template>
 
 <script></script>

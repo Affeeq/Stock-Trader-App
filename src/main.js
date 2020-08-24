@@ -1,23 +1,13 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router';
-import VueResource from 'vue-resource';
-import App from './App.vue'
-import { routes } from './routes';
+import Vue from 'vue';
+import BootstrapVue from "bootstrap-vue";
+import App from './App.vue';
+import router from './routes';
 import { store } from './store/store.js';
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-// app config
-Vue.use(VueRouter);
-Vue.use(VueResource);
-
-// root link to DB
-Vue.http.options.root = 'https://the-stock-trader-6732a.firebaseio.com/';
-
-// accessing routes
-const router = new VueRouter({
-	routes,
-	mode: 'history'
-});
-
+// Install BootstrapVue
+Vue.use(BootstrapVue);
 
 // root vue instance
 new Vue({

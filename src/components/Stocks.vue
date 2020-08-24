@@ -1,13 +1,13 @@
 <template>
-	<div class="container">
-		<div class="row">
-			<div class="col-6 mt-3" v-for="(stock, index) in stocks">
-				<div class="card">
-					<div class="card-header bg-success">
-						<h5 class="card-title">{{ stock.name }}</h5>
+	<b-container>
+		<b-row>
+			<b-col cols="6" class="mt-3" v-for="(stock, index) in stocks" :key="stocks.stock">
+				<b-card no-body>
+					<b-card-header header-bg-variant="success">
+						<b-card-title title-tag="h5">{{ stock.name }}</b-card-title>
 						<p>(Price: {{ stock.price }})</p>
-					</div>
-					<div class="card-body text-center text-md-left">
+					</b-card-header>
+					<b-card-body class="text-center text-md-left">
 						<input 
 							:id="stock.name" 
 							type="number" 
@@ -16,16 +16,18 @@
 							@blur="clear(quantity[index], index)" 
 							:class="{ danger: disable(quantity[index], stock.price) }"
 						>
-						<button 
-							class="btn btn-success float-md-right mt-3 mt-md-0" 
+						<b-button 
+							variant="success"
+							class="float-md-right mt-3 mt-md-0" 
 							@click="buyStocks(stock)" 
 							:disabled="disable(quantity[index], stock.price)"
-						>Buy</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+							>Buy
+						</b-button>
+					</b-card-body>
+				</b-card>
+			</b-col>
+		</b-row>
+	</b-container>
 </template>
 
 <script>

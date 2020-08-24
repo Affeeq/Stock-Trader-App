@@ -1,15 +1,18 @@
 # Stock Trader App
 
-### Website hosted on AWS S3 - http://vue-stock-trader-app.s3-website.us-east-2.amazonaws.com
+### Website hosted on AWS S3 - http://vue-stock-trader-app-v2.s3-website.us-east-2.amazonaws.com
+
+### Demo - email: test1@email.com, password: 123456
 
 ### Technology
 * Vue.js
-* Bootstrap
+* Bootstrap-Vue
+* Firebase
 
 ### About
-* It is a stock trading app that allows user to buy and sell stocks. 
-* 'End Day' feature to end day and start a new day with new stock prices
-* Save and Load data feature to save and load data from database
+* Add User Authorization into the app.
+* Add navigation guards
+* Migrated to Bootstrap-Vue 
 
 ### Database: Firebase
 
@@ -20,3 +23,7 @@
 * Using a database and setting up put and get request
 * Vuex modules communication
 * Dynamic styling and events 
+* Using Bootstrap-Vue instead of Bootstrap to make Vue app responsive
+* Added navigation guards by using resources
+* Added user authorization using Firebase authentication
+* Added form validation that is responsive to user's inputs
