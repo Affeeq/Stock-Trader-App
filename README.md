@@ -17,6 +17,12 @@
 ### Database: Firebase
 
 ### Key things that I learned from this project
+* Vuex as a central store 
+* Vue Router for links
+* Component communication with transition and animation
+* Using a database and setting up put and get request
+* Vuex modules communication
+* Dynamic styling and events 
 * Using Bootstrap-Vue instead of Bootstrap to make Vue app responsive
 * Added navigation guards by using resources
 * Added user authorization using Firebase authentication
