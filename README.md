@@ -31,3 +31,11 @@
 ### Pages
 
 ![Sign In](https://github.com/Affeeq/Stock-Trader-App/blob/master/images/Screen%20Shot%202020-08-20%20at%209.04.15%20PM.png)
+
+![Sign Up](https://github.com/Affeeq/Stock-Trader-App/blob/master/images/Screen%20Shot%202020-08-20%20at%209.05.16%20PM.png)
+
+![Home](https://github.com/Affeeq/Stock-Trader-App/blob/master/images/Screen%20Shot%202020-08-20%20at%209.05.59%20PM.png)
+
+![Stocks](https://github.com/Affeeq/Stock-Trader-App/blob/master/images/Screen%20Shot%202020-08-20%20at%209.06.48%20PM.png)
+
+![Portfolio](https://github.com/Affeeq/Stock-Trader-App/blob/master/images/Screen%20Shot%202020-08-20%20at%209.08.03%20PM.png)
