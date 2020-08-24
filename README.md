@@ -27,3 +27,7 @@
 * Added navigation guards by using resources
 * Added user authorization using Firebase authentication
 * Added form validation that is responsive to user's inputs
+
+### Pages
+
+![Sign In](https://github.com/Affeeq/Stock-Trader-App/blob/master/images/Screen%20Shot%202020-08-20%20at%209.04.15%20PM.png)
